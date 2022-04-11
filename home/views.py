@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect
 # Create your views here.
@@ -21,12 +21,18 @@ class SignupView(CreateView):
             return redirect('notes.list')
         return super().get(request, *args, **kwargs)
 
+
 class LoginInterfaceView(LoginView):
     template_name = 'home/login.html'
 
 
 class LogoutInterfaceView(LogoutView):
     template_name = 'home/logout.html'
+
+
+class PasswordChangeInterfaceView(PasswordChangeView):
+    template_name = 'home/password_change.html'
+    success_url = '/'
 
 
 class HomeView(TemplateView):
